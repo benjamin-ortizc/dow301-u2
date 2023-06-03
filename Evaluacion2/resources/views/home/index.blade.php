@@ -1,8 +1,11 @@
-@extends('templates.master')
-
-@section('style-ref')
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 
   <style>
     .button {
@@ -18,16 +21,20 @@
       text-decoration: none;
     }
   </style>
-@endsection
 
-@section('main-content')
-  <div class="d-flex justify-content-center align-items-center flex-column bg-dark" style="height:100vh;">
-    <h1 class="text-center text-light">
-      Inicio
-    </h1>
+  <title>Document</title>
+</head>
+<body>
+  <main class="bg-dark">
+    <div class="d-flex justify-content-center align-items-center flex-column" style="height:100vh;">
+      <h1 class="text-center text-light">
+        Inicio
+      </h1>
 
-    <a href="{{route('estudiante.index')}}" class="button">Acciones de estudiante</a>
-    <a href="{{route('profesor.index')}}" class="button">Acciones de profesor</a>
-    <a href="{{route('admin.index')}}" class="button">Acciones de administrador</a>
-  </div>
-@endsection
+      <a href="{{route('estudiante.index')}}" class="button">Acciones de estudiante</a>
+      <a href="{{route('profesor.index')}}" class="button">Acciones de profesor</a>
+      <a href="{{route('admin.index')}}" class="button">Acciones de administrador</a>
+    </div>
+  </main>
+</body>
+</html>

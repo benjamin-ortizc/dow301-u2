@@ -10,24 +10,33 @@
   <title>Document</title>
 </head>
 <body>
-{{--  <nav>--}}
-{{--    <a href="#">Inicio</a>--}}
-{{--    <ul>--}}
-{{--      <li>--}}
-{{--        <a href="#">Estudiante</a>--}}
-{{--      </li>--}}
 
-{{--      <li>--}}
-{{--        <a href="#">Profesor</a>--}}
-{{--      </li>--}}
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">TSI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('home.index')}}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('estudiante.index')}}">Estudiante</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('profesor.index')}}">Profesor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.index')}}">Administrador</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-{{--      <li>--}}
-{{--        <a href="#">Administrador</a>--}}
-{{--      </li>--}}
-{{--    </ul>--}}
-{{--  </nav>--}}
-
-  <div class="">
+  <div class="container-fluid">
     @yield('main-content')
   </div>
 
