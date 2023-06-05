@@ -11,9 +11,4 @@ class EstudianteController extends Controller
     $estudiantes = Estudiante::all();
     return view('estudiante.index', compact("estudiantes"));
   }
-
-  public function show(Request $request) {
-    echo($request);
-    exit();
-  }
 }

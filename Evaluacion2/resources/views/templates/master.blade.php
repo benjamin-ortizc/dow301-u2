@@ -23,10 +23,10 @@
             <a class="nav-link active" aria-current="page" href="{{route('home.index')}}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('estudiante.index')}}">Estudiante</a>
+            <a class="nav-link" href="{{route('estudiantes.index')}}">Estudiante</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('profesor.index')}}">Profesor</a>
+            <a class="nav-link" href="{{route('profesores.index')}}">Profesor</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('admin.index')}}">Administrador</a>

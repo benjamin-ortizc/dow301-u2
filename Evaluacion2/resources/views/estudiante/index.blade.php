@@ -25,8 +25,10 @@
             <td>{{$estudiante->nombre}}</td>
             <td>{{$estudiante->apellido}}</td>
             <td>
-              <a class="btn btn-primary">
-                <span class="material-icons">visibility</span>
+              <a class="btn btn-primary" href="{{route('propuesta.show', $estudiante)}}">
+                <div class="d-flex justify-content-center">
+                  <span class="material-icons">visibility</span>
+                </div>
               </a>
             </td>
           </tr>
