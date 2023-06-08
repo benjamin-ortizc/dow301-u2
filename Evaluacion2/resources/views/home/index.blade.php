@@ -31,7 +31,7 @@
         Inicio
       </h1>
 
-      <a href="{{route('estudiantes.index')}}" class="button">Acciones de estudiante</a>
+      <a href="{{route('propuestas.index')}}" class="button">Acciones de estudiante</a>
       <a href="{{route('profesores.index')}}" class="button">Acciones de profesor</a>
       <a href="{{route('admin.index')}}" class="button">Acciones de administrador</a>
     </div>

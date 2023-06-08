@@ -5,7 +5,7 @@
     <h1 class="fs-2">Menu de Administrador</h1>
     <p class="fs-5">Qué deseas hacer?</p>
 
-    <a href="" class="btn btn-primary">Lista de estudiantes</a>
-    <a href="" class="btn btn-primary mt-2">Lista de profesores</a>
+    <a href="{{route('estudiantes.index')}}" class="btn btn-primary">Lista de estudiantes</a>
+    <a href="{{route('profesores.index')}}" class="btn btn-primary mt-2">Lista de profesores</a>
   </div>
 @endsection

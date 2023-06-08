@@ -19,11 +19,24 @@ use App\Http\Controllers\PropuestasController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/estudiantes', [EstudianteController::class, 'index'])->name('estudiantes.index');
-Route::get('/profesores', [ProfesorController::class, 'index'])->name('profesores.index');
+Route::delete('/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+Route::post('/estudiantes/create', [EstudianteController::class, 'store'])->name('estudiantes.store');
+
+Route::get('/estudiantes/propuestas', [PropuestasController::class, 'index'])->name('propuestas.index');
+Route::get('/estudiantes/propuestas/{estudiante}', [PropuestasController::class, 'show'])->name('propuestas.show');
+Route::get('/estudiantes/propuestas/{estudiante}/create', [PropuestasController::class, 'create'])->name('propuestas.create');
+Route::get('/estudiantes/propuestas/descargar/{estudiante}', [PropuestasController::class, 'download'])->name('propuestas.download');
+Route::post('/estudiantes/propuestas/{estudiante}/create', [PropuestasController::class, 'store'])->name('propuestas.store');
+Route::post('/estudiantes/propuestas', [PropuestasController::class, 'enter'])->name('propuestas.enter');
+Route::delete('/estudiantes/propuestas/{propuesta}', [PropuestasController::class, 'destroy'])->name('propuestas.destroy');
+
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-Route::get('/propuestas/{estudiante}', [PropuestasController::class, 'show'])->name('propuesta.show');
-Route::get('/propuestas/{estudiante}/create', [PropuestasController::class, 'create'])->name('propuesta.create');
-Route::get('/propuestas/descargar/{estudiante}', [PropuestasController::class, 'download'])->name('propuesta.download');
-Route::post('/propuestas/{estudiante}/create', [PropuestasController::class, 'store'])->name('propuesta.store');
-Route::delete('/propuestas/{propuesta}', [PropuestasController::class, 'destroy'])->name('propuesta.destroy');
+Route::get('/admin/estudiantes/create',[EstudianteController::class, 'create'])->name('estudiantes.create');
+
+Route::get('/profesores', [ProfesorController::class, 'index'])->name('profesores.index');
+Route::get('/profesores/create', [ProfesorController::class, 'create'])->name('profesores.create');
+Route::post('/profesores/create', [ProfesorController::class, 'store'])->name('profesores.store');
+Route::delete('/profesores/{profesor}', [ProfesorController::class, 'destroy'])->name('profesores.destroy');
+

@@ -10,9 +10,18 @@ use Illuminate\Support\Facades\Storage;
 
 class PropuestasController extends Controller
 {
+  public function enter(Request $req) {
+    $estudiante = Estudiante::find($req->estudiantes);
+    return view('propuestas.show', compact('estudiante'));
+  }
+
+  public function index() {
+    $estudiantes = Estudiante::all();
+    return view('propuestas.index', compact('estudiantes'));
+  }
 
   public function show(Estudiante $estudiante) {
-    return view('estudiante.show', compact('estudiante'));
+    return view('propuestas.show', compact('estudiante'));
   }
 
   public function create(Estudiante $estudiante) {
@@ -28,9 +37,11 @@ class PropuestasController extends Controller
     $file = $request->file('archivo');
 
     $hashedName = $file->hashName();
+
     Storage::putFileAs(
       'propuestas', $request->file('archivo'), $hashedName
     );
+
     Storage::setVisibility($hashedName, 'public');
 
     $propuesta->fecha = Carbon::now();
@@ -38,11 +49,11 @@ class PropuestasController extends Controller
     $propuesta->estado = 0;
     $propuesta->estudiante_rut = $estudiante->rut;
     $propuesta->save();
-    return redirect()->route('estudiante.show', $estudiante);
+    return redirect()->route('propuestas.show', $estudiante);
   }
 
   public function destroy(Propuesta $propuesta) {
     $propuesta->delete();
-    return redirect()->route('estudiante.index');
+    return redirect()->route('estudiantes.index');
   }
 }

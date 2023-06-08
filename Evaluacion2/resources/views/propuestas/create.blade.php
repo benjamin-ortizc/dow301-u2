@@ -8,7 +8,7 @@
           <h5 class="card-title">Propuesta</h5>
         </div>
         <div class="card-body">
-          <form method="POST" class="form" action="{{ route('propuesta.store', $estudiante) }}" enctype="multipart/form-data">
+          <form method="POST" class="form" action="{{ route('propuestas.store', $estudiante) }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="archivo" class="form-label">Ingresa tu archivo PDF para ser recibido por los profesores</label>

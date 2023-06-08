@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class EstudiantesSeeder extends Seeder
             "rut" => "21579160-2",
             "nombre" => "Benjamin",
             "apellido" => "Ortiz",
-            "email" => "benjamin.ortiz@usm.cl"
+            "email" => "benjamin.ortiz@usm.cl",
           ],
           [
             "rut" => "21345224-2",

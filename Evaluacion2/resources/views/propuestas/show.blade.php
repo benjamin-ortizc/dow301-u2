@@ -22,7 +22,7 @@ $coloresEstados = [
   @if($estudiante->propuestas()->get() == "[]")
     <div class="d-flex flex-column align-items-center mt-4">
       <h4>No tienes una propuesta de proyecto</h4>
-      <a class="btn btn-success p-2 m-2" href="{{route('propuesta.create', $estudiante)}}">Crear nueva propuesta</a>
+      <a class="btn btn-success p-2 m-2" href="{{route('propuestas.create', $estudiante)}}">Crear nueva propuesta</a>
     </div>
   @endif
 
@@ -32,7 +32,7 @@ $coloresEstados = [
       $estudiante->propuestas()->get()->last()->estado != 3
     )
       <div class="d-flex justify-content-end">
-        <a class="btn btn-success p-2 m-2" href="{{route('propuesta.create', $estudiante)}}">Crear nueva propuesta</a>
+        <a class="btn btn-success p-2 m-2" href="{{route('propuestas.create', $estudiante)}}">Crear nueva propuesta</a>
       </div>
     @endif
 
@@ -46,7 +46,7 @@ $coloresEstados = [
           <div class="card-body">
             <p>
               PDF de la propuesta:
-              <a href="{{route('propuesta.download', $estudiante->propuestas()->get()->last()->documento)}}">
+              <a href="{{route('propuestas.download', $estudiante->propuestas()->get()->last()->documento)}}">
                 Descargar propuesta
               </a>
             </p>
@@ -57,7 +57,7 @@ $coloresEstados = [
               </span>
             </p>
             @if($estudiante->propuestas()->get()->last()->estado != 3)
-              <form method="POST" action="{{ route('propuesta.destroy', $estudiante->propuestas()->get()->last()) }}">
+              <form method="POST" action="{{ route('propuestas.destroy', $estudiante->propuestas()->get()->last()) }}">
                 @method('delete')
                 @csrf
                 <button type="submit" class="btn btn-sm btn-danger">
