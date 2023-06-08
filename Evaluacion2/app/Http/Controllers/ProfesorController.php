@@ -24,12 +24,12 @@ class ProfesorController extends Controller
     $profesor->apellido = $request->apellido;
     $profesor->email = $request->email;
     $profesor->save();
-    return redirect()->route('admin.showProfesores', compact('profesor'));
+    return redirect()->route('profesores.index', compact('profesor'));
   }
 
   public function destroy(Profesor $profesor)
   {
     $profesor->delete();
-    return redirect()->route('admin.showProfesores', compact('profesor'));
+    return redirect()->route('profesores.index', compact('profesor'));
   }
 }

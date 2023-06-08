@@ -16,7 +16,7 @@ class EstudianteController extends Controller
   public function destroy(Estudiante $estudiante)
   {
     $estudiante->delete();
-    return redirect()->route('admin.showEstudiantes', compact('estudiante'));
+    return redirect()->route('estudiantes.index', compact('estudiante'));
   }
 
   public function create()
@@ -32,6 +32,6 @@ class EstudianteController extends Controller
     $estudiante->apellido = $request->apellido;
     $estudiante->email = $request->email;
     $estudiante->save();
-    return redirect()->route('admin.showEstudiantes', compact('estudiantes'));
+    return redirect()->route('estudiantes.index', compact('estudiantes'));
   }
 }
