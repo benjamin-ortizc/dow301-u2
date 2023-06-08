@@ -11,14 +11,4 @@ class AdminController extends Controller
   public function index() {
     return view('admin.index');
   }
-
-  public function showEstudiantes() {
-    $estudiantes = Estudiante::all();
-    return view('admin.showEstudiantes', compact('estudiantes'));
-  }
-
-  public function showProfesores() {
-    $profesores = Profesor::all();
-    return view('admin.showProfesores', compact('profesores'));
-  }
 }
