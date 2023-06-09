@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profesor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
@@ -12,7 +13,7 @@ class PropuestasController extends Controller
 {
   public function enter(Request $req) {
     $estudiante = Estudiante::find($req->estudiantes);
-    return view('propuestas.show', compact('estudiante'));
+    return redirect()->route('propuestas.show', compact('estudiante'));
   }
 
   public function index() {
@@ -21,11 +22,53 @@ class PropuestasController extends Controller
   }
 
   public function show(Estudiante $estudiante) {
-    return view('propuestas.show', compact('estudiante'));
+    $profesores = Profesor::all();
+    $propuestas = Propuesta::where('estudiante_rut', $estudiante->rut)->get();
+//    dd($propuestas);
+    return view('propuestas.show', compact([
+      'estudiante',
+      'profesores',
+      'propuestas'
+    ]));
   }
 
   public function create(Estudiante $estudiante) {
     return view('propuestas.create', compact('estudiante'));
+  }
+
+  public function createComment(Estudiante $estudiante)
+  {
+    $profesores = Profesor::all();
+    return view('propuestas.createComment', compact
+      ([
+        'estudiante',
+        'profesores'
+      ])
+    );
+  }
+
+  public function storeComment(Request $request, Estudiante $estudiante) {
+    $profesor = Profesor::find($request->profesor);
+    $propuesta = $estudiante->propuestas()->get()->last();
+
+    $profesor_id = $request->profesor;
+    $propuesta_id = $propuesta->id;
+
+    $profesor->propuestas()->attach($propuesta_id,
+      [
+        'fecha'      => Carbon::now()->toDateString(),
+        'hora'       => Carbon::now()->toTimeString(),
+        'comentario' => $request->comentario
+      ]
+    );
+
+    return redirect()->route('propuestas.show', $estudiante);
+  }
+
+  public function destroyComment(Estudiante $estudiante, Profesor $profesor) {
+    $propuesta = Propuesta::where('estudiante_rut', $estudiante->rut)->first();
+    $propuesta->profesores()->detach($profesor->id);
+    return redirect()->route('propuestas.show', $estudiante);
   }
 
   public function download($fileName) {
@@ -36,16 +79,15 @@ class PropuestasController extends Controller
     $propuesta = new Propuesta();
     $file = $request->file('archivo');
 
-    $hashedName = $file->hashName();
-
+    $fileName = $file->getClientOriginalName();
     Storage::putFileAs(
-      'propuestas', $request->file('archivo'), $hashedName
+      'propuestas', $file, $fileName
     );
 
-    Storage::setVisibility($hashedName, 'public');
+    Storage::setVisibility($fileName, 'public');
 
     $propuesta->fecha = Carbon::now();
-    $propuesta->documento = $hashedName;
+    $propuesta->documento = $fileName;
     $propuesta->estado = 0;
     $propuesta->estudiante_rut = $estudiante->rut;
     $propuesta->save();

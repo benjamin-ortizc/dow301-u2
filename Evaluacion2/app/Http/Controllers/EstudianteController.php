@@ -10,6 +10,7 @@ class EstudianteController extends Controller
   public function index()
   {
     $estudiantes = Estudiante::all();
+
     return view('estudiantes.index', compact("estudiantes"));
   }
 
