@@ -13,7 +13,7 @@ class PropuestasController extends Controller
 {
   public function enter(Request $req) {
     $estudiante = Estudiante::find($req->estudiantes);
-    return redirect()->route('propuestas.show', compact('estudiante'));
+    return redirect()->route('propuestas.show', $estudiante);
   }
 
   public function index() {
@@ -36,13 +36,25 @@ class PropuestasController extends Controller
     return view('propuestas.create', compact('estudiante'));
   }
 
-  public function createComment(Estudiante $estudiante)
+  public function edit(Estudiante $estudiante)
   {
-    $profesores = Profesor::all();
+    return view('propuestas.edit', compact('estudiante'));
+  }
+
+  public function update(Request $req, Estudiante $estudiante)
+  {
+    $propuesta = $estudiante->propuestas()->get()->last();
+    $propuesta->estado = $req->estado;
+    $propuesta->save();
+    return redirect()->route('propuestas.show', compact('estudiante'));
+  }
+
+  public function createComment(Estudiante $estudiante, Profesor $profesor)
+  {
     return view('propuestas.createComment', compact
       ([
         'estudiante',
-        'profesores'
+        'profesor'
       ])
     );
   }

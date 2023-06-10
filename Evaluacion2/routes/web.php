@@ -27,20 +27,27 @@ Route::post('/estudiantes/create', [EstudianteController::class, 'store'])->name
 Route::get('/estudiantes/propuestas', [PropuestasController::class, 'index'])->name('propuestas.index');
 Route::get('/estudiantes/propuestas/{estudiante}', [PropuestasController::class, 'show'])->name('propuestas.show');
 Route::get('/estudiantes/propuestas/{estudiante}/create', [PropuestasController::class, 'create'])->name('propuestas.create');
+Route::get('/estudiantes/propuestas/{estudiante}/edit', [PropuestasController::class, 'edit'])->name('propuestas.edit');
+Route::put('/estudiantes/propuestas/{estudiante}', [PropuestasController::class, 'update'])->name('propuestas.update');
 Route::get('/estudiantes/propuestas/descargar/{estudiante}', [PropuestasController::class, 'download'])->name('propuestas.download');
 Route::post('/estudiantes/propuestas/{estudiante}/create', [PropuestasController::class, 'store'])->name('propuestas.store');
 Route::post('/estudiantes/propuestas', [PropuestasController::class, 'enter'])->name('propuestas.enter');
-Route::get('/estudiantes/propuestas/{estudiante}/createComment', [PropuestasController::class, 'createComment'])->name('propuestas.createComment');
-Route::post('/estudiantes/propuestas/{estudiante}/createComment', [PropuestasController::class, 'storeComment'])->name('propuestas.storeComment');
+Route::get('/estudiantes/propuestas/{estudiante}/createComment/{profesor}', [PropuestasController::class, 'createComment'])->name('propuestas.createComment');
+Route::post('/estudiantes/propuestas/{estudiante}/createComment/{profesor}', [PropuestasController::class, 'storeComment'])->name('propuestas.storeComment');
 Route::delete('/estudiantes/propuestas/{estudiante}/deleteComment/{profesor}', [PropuestasController::class, 'destroyComment'])->name('propuestas.destroyComment');
 Route::delete('/estudiantes/propuestas/{propuesta}', [PropuestasController::class, 'destroy'])->name('propuestas.destroy');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/estudiantes/create',[EstudianteController::class, 'create'])->name('estudiantes.create');
 
-Route::get('/profesores/', [ProfesorController::class, 'index'])->name('profesores.index');
-Route::get('/profesores/{profesor}', [ProfesorController::class, 'show'])->name('profesores.show');
+Route::get('/profesores/lista', [ProfesorController::class, 'indexList'])->name('profesores.indexList');
+//Route::get('/profesores/{profesor}', [ProfesorController::class, 'show'])->name('profesores.show');
+
 Route::get('/profesores/create', [ProfesorController::class, 'create'])->name('profesores.create');
 Route::post('/profesores/create', [ProfesorController::class, 'store'])->name('profesores.store');
+
 Route::delete('/profesores/{profesor}', [ProfesorController::class, 'destroy'])->name('profesores.destroy');
 
+Route::get('/profesores', [ProfesorController::class, 'index'])->name('profesores.index');
+Route::post('/profesores', [ProfesorController::class, 'enter'])->name('profesores.enter');
+Route::get('/profesores/{profesor}/estudiantes', [ProfesorController::class, 'showEstudiantes'])->name('profesores.estudiantes.show');

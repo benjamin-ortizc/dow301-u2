@@ -1,66 +1,29 @@
 @extends('templates.master')
 
-@section('style-ref')
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-@endsection
-
 @section('main-content')
-  <div class="row mt-4">
-    <div class="col-0 col-md-2"></div>
-    <div class="col-12 col-md-8">
-      <div class="row">
-        <div class="col-6 d-flex align-items-end">
-          <h4>Lista de profesores</h4>
+  <div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="px-4">
+      <h3 class="text-center text-info">
+        Bienvenido Profesor
+      </h3>
+      <p class="text-light">Seleccione cual es su nombre para poder continuar</p>
+      <div class="card mt-2 bg-primary">
+        <div class="card-body">
+          <form method="POST" action="{{ route('profesores.enter') }}">
+            @method('POST')
+            @csrf
+            <select name="profesores" class="form-select bg-secondary">
+              <option value="none" selected>Seleccione</option>
+              @foreach($profesores as $profesor)
+                <option value="{{$profesor->id}}">{{$profesor->nombre . ' ' . $profesor->apellido}}</option>
+              @endforeach
+            </select>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn btn-secondary mt-2 px-2 text-light rounded-2">Ingresar</button>
+            </div>
+          </form>
         </div>
-        <div class="col-6">
-          <div class="d-flex justify-content-end">
-            <a class="btn btn-success p-2 m-2" href="{{ route('profesores.create', compact("profesores")) }}">
-              Crear nuevo profesor
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-dark">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Acciones</th>
-          </tr>
-          </thead>
-          <tbody>
-          @foreach($profesores as $index => $profesor)
-            <tr>
-              <th scope="row">{{$index+1}}</th>
-              <td>{{$profesor->nombre}}</td>
-              <td>{{$profesor->apellido}}</td>
-              <td>
-                <div class="d-flex">
-                  <a class="btn btn-success mx-2" href="{{route('estudiantes.index')}}">
-                    <div class="d-flex justify-content-center">
-                      <span class="material-icons">login</span>
-                    </div>
-                  </a>
-
-                  <form method="POST" action="{{route('profesores.destroy', $profesor)}}">
-                    @method('delete')
-                    @csrf
-                    <button type="submit" class="btn btn-danger">
-                      <div class="d-flex justify-content-center">
-                        <span class="material-icons">delete</span>
-                      </div>
-                    </button>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          @endforeach
-          </tbody>
-        </table>
       </div>
     </div>
-    <div class="col-0 col-md-2"></div>
   </div>
 @endsection

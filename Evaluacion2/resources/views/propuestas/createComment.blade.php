@@ -1,32 +1,29 @@
 @extends('templates.master')
 
 @section('main-content')
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
-      <form method="POST" class="p-4" action="{{route('propuestas.storeComment', $estudiante)}}">
-        @method('POST')
-        @csrf
-        <h4>Nuevo Comentario</h4>
-        <div class="mb-3">
-          <select class="form-select" name="profesor" aria-label="Selecciona nombre para comentar">
-            <option selected>Seleccione su nombre</option>
-            @foreach($profesores as $profesor)
-              <option value="{{$profesor->id}}">{{$profesor->nombre . ' ' . $profesor->apellido}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="mb-3 form-floating">
-          <textarea class="form-control" placeholder="Escribe el comentario" name="comentario" id="comentario" style="height: 100px"></textarea>
-          <label for="comentario">Ingresa la retroalimentación</label>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button type="reset" class="mx-2 btn btn-dark">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-      </form>
-    </div>
-    <div class="col-2"></div>
-  </div>
 
+  <div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="px-4">
+      <h3 class="text-center text-info">
+        Nuevo Comentario
+      </h3>
+      <div class="card mt-2 bg-primary">
+        <div class="card-body">
+          <form method="POST" action="{{route('propuestas.storeComment', ['estudiante' => $estudiante, 'profesor' => $profesor])}}">
+            @method('POST')
+            @csrf
+            <div class="mb-3 form-floating">
+              <textarea class="form-control" placeholder="Escribe el comentario" name="comentario" id="comentario" style="width: 100%; height: 100px;"></textarea>
+              <label for="comentario">Ingresa el mensaje</label>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="reset" class="btn btn-info text-white">Cancelar</button>
+              <button type="submit" class="btn btn-success text-white">Enviar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
